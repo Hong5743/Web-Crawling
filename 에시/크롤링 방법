@@ -1,0 +1,33 @@
+<gradle>
+implementation 'org.jsoup:jsoup:1.14.3' // 현재 최신 버전인지 확인
+</>
+
+<java>
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import java.io.IOException;
+
+public class WebCrawler {
+
+    public static void main(String[] args) {
+        try {
+            // 웹페이지 연결
+            Document doc = Jsoup.connect("https://example.com").get();
+
+            // CSS 선택자를 사용하여 원하는 요소 선택
+            Elements links = doc.select("a[href]");
+
+            // 선택된 요소에서 데이터 추출
+            for (Element link : links) {
+                System.out.println("Link: " + link.attr("href"));
+                System.out.println("Text: " + link.text());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+위의 예제에서는 Jsoup을 사용하여 "https://example.com" 웹페이지에서 모든 링크의 URL과 텍스트를 추출하는 간단한 예시
